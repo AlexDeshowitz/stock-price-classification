@@ -3,7 +3,8 @@ from typing import Dict
 
 from kedro.pipeline import Pipeline
 
-from stock_price_classification.pipeline import create_pipeline
+
+from stock_price_classification.pipelines import pull_stock_data
 
 
 def register_pipelines() -> Dict[str, Pipeline]:
@@ -13,6 +14,9 @@ def register_pipelines() -> Dict[str, Pipeline]:
         A mapping from a pipeline name to a ``Pipeline`` object.
     """
 
+    data_pull_pipeline = pull_stock_data.create_pipeline()
+
     return {
-        "__default__": create_pipeline(),
+        "__default__": data_pull_pipeline,
+        "data_pull" : data_pull_pipeline
     }

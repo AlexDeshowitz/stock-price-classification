@@ -1,3 +1,14 @@
-train_fraction: 0.8
-random_state: 3
-target_column: species
+
+# parameters for the modeling
+
+stock_pull_settings:
+  equities: ['XLE']
+  modeling_start : '2019-01-01' # start date of the modeling period format: '2022-01-01'
+  modeling_end : '2022-08-31' # end date of the modeling period format: '2022-01-01'
+
+  sleep_min : 2 # minumum amount of sleep to take between pulls
+  sleep_max : 10 # maximum amount of sleep to take between pulls
+  expire_days : 3 # standard set of days until expiration of the cache
+  single_dataframe : True # whether to store all stocks into a single dataframe (recommended for Kedro functionality)
+
+

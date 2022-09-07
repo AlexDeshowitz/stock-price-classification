@@ -2,6 +2,11 @@
 from the Kedro defaults. For further information, including these default values, see
 https://kedro.readthedocs.io/en/stable/kedro_project_setup/settings.html."""
 
+#from kedro.config import TemplatedConfigLoader
+
+#from kedro.config import ConfigLoader
+
+
 # Instantiated project hooks.
 # from stock_price_classification.hooks import ProjectHooks
 # HOOKS = (ProjectHooks(),)
@@ -35,3 +40,20 @@ https://kedro.readthedocs.io/en/stable/kedro_project_setup/settings.html."""
 # Class that manages the Data Catalog.
 # from kedro.io import DataCatalog
 # DATA_CATALOG_CLASS = DataCatalog
+
+#CONFIG_LOADER_CLASS = TemplatedConfigLoader
+# Keyword arguments to pass to the `CONFIG_LOADER_CLASS` constructor.
+
+#conf_paths = ["conf/base", "conf/local"]
+#conf_loader = ConfigLoader(conf_paths)
+#CONFIG_LOADER_ARGS = {
+#    "globals_pattern": "parameters/globals.yml",
+
+#}
+
+
+#conf_paths = ["conf/base", "conf/local"]
+#conf_loader = ConfigLoader(conf_paths)
+#conf_catalog = conf_loader.get("parameters*", "parameters*/**")
+
+

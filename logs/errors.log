@@ -1,0 +1,6 @@
+2022-09-06 10:18:56,019 - kedro.pipeline.node - ERROR - Node 'pull-in-stock-data: pull_stock_data([test,params:test_pull_params]) -> [raw_equity_data]' failed with error: 
+'start_date'
+2022-09-06 10:21:05,281 - kedro.pipeline.node - ERROR - Node 'pull-in-stock-data: pull_stock_data([test,params:test_pull_params]) -> [raw_equity_data]' failed with error: 
+'start_date'
+2022-09-07 09:30:53,457 - kedro.pipeline.node - ERROR - Node 'pull-in-stock-data: pull_stock_data([params:stock_pull_settings]) -> [raw_combined_equity_data]' failed with error: 
+[Errno 2] No such file or directory: '../data/01_raw/separate_stock_pulls/XLE.csv'

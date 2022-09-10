@@ -1,0 +1,5 @@
+2022-09-07 11:47:31,637 - root - INFO - Updated path to Kedro project: /Users/Alex_Deshowitz/Box Sync/portfolio_projects/stock-price-classification
+2022-09-07 11:47:31,910 - kedro.framework.session.store - INFO - `read()` not implemented for `BaseSessionStore`. Assuming empty store.
+2022-09-07 11:47:32,209 - root - WARNING - Kedro extension was registered but couldn't find a Kedro project. Make sure you run `%reload_kedro <path_to_kedro_project>`.
+2022-09-07 11:47:34,024 - numexpr.utils - INFO - Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2022-09-07 11:47:34,025 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.

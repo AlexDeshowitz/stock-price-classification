@@ -4,7 +4,7 @@ from typing import Dict
 from kedro.pipeline import Pipeline
 
 
-from stock_price_classification.pipelines import pull_stock_data
+from stock_price_classification.pipelines import pull_stock_data, feature_engineering
 
 
 def register_pipelines() -> Dict[str, Pipeline]:
@@ -15,8 +15,12 @@ def register_pipelines() -> Dict[str, Pipeline]:
     """
 
     data_pull_pipeline = pull_stock_data.create_pipeline()
+    feature_engineering_pipeline = feature_engineering.create_pipeline()
 
     return {
-        "__default__": data_pull_pipeline,
-        "data_pull" : data_pull_pipeline
+        "__default__": feature_engineering_pipeline,
+        "full_run" : data_pull_pipeline + feature_engineering_pipeline,
+        # individual pipelines:
+        "data_pull" : data_pull_pipeline,
+        "feature_engineering" : feature_engineering_pipeline
     }

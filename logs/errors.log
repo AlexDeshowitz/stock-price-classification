@@ -4,3 +4,33 @@
 'start_date'
 2022-09-07 09:30:53,457 - kedro.pipeline.node - ERROR - Node 'pull-in-stock-data: pull_stock_data([params:stock_pull_settings]) -> [raw_combined_equity_data]' failed with error: 
 [Errno 2] No such file or directory: '../data/01_raw/separate_stock_pulls/XLE.csv'
+2022-09-10 15:58:34,725 - kedro.pipeline.node - ERROR - Node 'Add-moving-averages: calculate_rolling_means([raw_combined_equity_data,params:stock_pull_settings]) -> [combined_equity_data_moving_averages]' failed with error: 
+'stock_field'
+2022-09-10 16:04:14,985 - kedro.pipeline.node - ERROR - Node 'Add-moving-averages: calculate_rolling_means([raw_combined_equity_data,params:moving_average_settings]) -> [combined_equity_data_moving_averages]' failed with error: 
+'stock_field'
+2022-09-10 16:05:42,003 - kedro.pipeline.node - ERROR - Node 'Add-moving-averages: calculate_rolling_means([raw_combined_equity_data,params:moving_average_settings]) -> [combined_equity_data_moving_averages]' failed with error: 
+0        XLE
+1        XLE
+2        XLE
+3        XLE
+4        XLE
+        ... 
+2767    AAPL
+2768    AAPL
+2769    AAPL
+2770    AAPL
+2771    AAPL
+Name: ticker, Length: 2772, dtype: object
+2022-09-10 16:07:50,360 - kedro.pipeline.node - ERROR - Node 'Add-moving-averages: calculate_rolling_means([raw_combined_equity_data,params:moving_average_settings]) -> [combined_equity_data_moving_averages]' failed with error: 
+0        XLE
+1        XLE
+2        XLE
+3        XLE
+4        XLE
+        ... 
+2767    AAPL
+2768    AAPL
+2769    AAPL
+2770    AAPL
+2771    AAPL
+Name: ticker, Length: 2772, dtype: object

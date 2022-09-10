@@ -47,4 +47,8 @@ raw_combined_equity_data: # raw dataset of the combined datasets in the model
   type: pandas.CSVDataSet
   filepath: data/01_raw/combined_stock_pulls/combined_raw_stock_data.csv
 
+combined_equity_data_moving_averages:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/combined_equity_data_moving_averages.csv
+
 

@@ -16,6 +16,10 @@ moving_average_settings:
   date_field : 'date'
   calculation_field : 'close'
   day_ranges :  [7, 14, 21]
-  exponential: False
+  exponential: False # whether to return exponential moving averages 
+
+  # calculation outputs:
+  indicator_return_type: 'boolean' # takes boolean, percentage, boolean_and_percentage; input to the create_above_below_indicator_fields function
+
 
 

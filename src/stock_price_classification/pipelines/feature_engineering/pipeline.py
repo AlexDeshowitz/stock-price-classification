@@ -5,7 +5,7 @@ generated using Kedro 0.18.2
 
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import calculate_rolling_means, calculate_rolling_standard_deviations
+from .nodes import calculate_rolling_means, calculate_rolling_standard_deviations, create_above_below_indicator_fields
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -20,8 +20,15 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=calculate_rolling_standard_deviations,
                 inputs=["combined_equity_data_moving_averages", "params:moving_average_settings"],
-                outputs="test_output_data",
+                outputs="combined_equity_data_standard_deviations",
                 name="Add-standard-deviations",
+            ),
+
+             node(
+                func=create_above_below_indicator_fields,
+                inputs=["combined_equity_data_standard_deviations", "params:moving_average_settings"],
+                outputs="test_output_data",
+                name="Add-indicator-fields",
             ),
         ]
     )

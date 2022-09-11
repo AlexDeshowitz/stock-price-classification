@@ -4,6 +4,7 @@ generated using Kedro 0.18.2
 """
 
 import pandas as pd
+import numpy as np
 
 
 
@@ -79,6 +80,50 @@ def calculate_rolling_standard_deviations(dataframe: pd.DataFrame, parameters: d
         del standard_deviations
 
     return dataframe
+
+
+def create_above_below_indicator_fields(dataframe: pd.DataFrame, 
+                                        parameters: dict) -> pd.DataFrame:
+
+    #TODO: Come back and format functions to be in proper format with black/linting with proper documentation
+
+    '''Function that adds indicator fields or calculates percentage differences or both depending on arguments
+    
+    Args:
+        dataframe: input as a pandas dataframe with fields already included for calculation
+
+    Returns: dataframe that includes representative fields for the functionality specified by the user
+    '''
+
+    target_columns = dataframe.columns[dataframe.columns.str.contains("|".join(['sma', 'ema']))]
+
+    for column in target_columns:
+
+        if parameters['indicator_return_type'] == 'boolean':
+
+            dataframe['above_'+ column + '_ind'] = np.where(dataframe[column].isna(), 
+            np.nan, np.where(dataframe[column] < dataframe[parameters['calculation_field']], 1, 0))
+        
+        elif parameters['indicator_return_type'] == 'percentage':
+
+            dataframe[column + '_pct_diff'] = np.where(dataframe[column].isna(), 
+            np.nan,  dataframe[column] / dataframe[parameters['calculation_field']] -1)
+        
+        else:
+
+            dataframe['above_'+ column + '_ind'] = np.where(dataframe[column].isna(), 
+            np.nan, np.where(dataframe[column] < dataframe[parameters['calculation_field']], 1, 0))
+
+            dataframe[column + '_pct_diff'] = np.where(dataframe[column].isna(), 
+            np.nan,  dataframe[column] / dataframe[parameters['calculation_field']] -1)
+
+    return dataframe
+
+            
+
+
+   
+
 
 
 

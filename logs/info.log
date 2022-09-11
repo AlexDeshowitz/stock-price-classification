@@ -1028,3 +1028,74 @@ You can resume the pipeline run by adding the following argument to your previou
 2022-09-11 09:44:19,836 - kedro.io.data_catalog - INFO - Saving data to 'test_output_data' (CSVDataSet)...
 2022-09-11 09:44:19,890 - kedro.runner.sequential_runner - INFO - Completed 2 out of 2 tasks
 2022-09-11 09:44:19,891 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully.
+2022-09-11 10:53:07,831 - kedro.framework.session.session - INFO - Kedro project stock-price-classification
+2022-09-11 10:53:08,232 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_VERSION = LooseVersion(pd.__version__)
+
+2022-09-11 10:53:08,235 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0210 = PANDAS_VERSION >= LooseVersion("0.21.0")
+
+2022-09-11 10:53:08,237 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0220 = PANDAS_VERSION >= LooseVersion("0.22.0")
+
+2022-09-11 10:53:08,239 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0230 = PANDAS_VERSION >= LooseVersion("0.23.0")
+
+2022-09-11 10:54:20,581 - kedro.framework.session.session - INFO - Kedro project stock-price-classification
+2022-09-11 10:54:20,962 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_VERSION = LooseVersion(pd.__version__)
+
+2022-09-11 10:54:20,964 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0210 = PANDAS_VERSION >= LooseVersion("0.21.0")
+
+2022-09-11 10:54:20,966 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0220 = PANDAS_VERSION >= LooseVersion("0.22.0")
+
+2022-09-11 10:54:20,968 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0230 = PANDAS_VERSION >= LooseVersion("0.23.0")
+
+2022-09-11 10:54:21,050 - kedro.io.data_catalog - INFO - Loading data from 'raw_combined_equity_data' (CSVDataSet)...
+2022-09-11 10:54:21,057 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2022-09-11 10:54:21,058 - kedro.pipeline.node - INFO - Running node: Add-moving-averages: calculate_rolling_means([raw_combined_equity_data,params:moving_average_settings]) -> [combined_equity_data_moving_averages]
+2022-09-11 10:54:21,074 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_moving_averages' (CSVDataSet)...
+2022-09-11 10:54:21,111 - kedro.runner.sequential_runner - INFO - Completed 1 out of 3 tasks
+2022-09-11 10:54:21,113 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_moving_averages' (CSVDataSet)...
+2022-09-11 10:54:21,121 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2022-09-11 10:54:21,123 - kedro.pipeline.node - INFO - Running node: Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_standard_deviations]
+2022-09-11 10:54:21,136 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_standard_deviations' (MemoryDataSet)...
+2022-09-11 10:54:21,138 - kedro.runner.sequential_runner - INFO - Completed 2 out of 3 tasks
+2022-09-11 10:54:21,140 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_standard_deviations' (MemoryDataSet)...
+2022-09-11 10:54:21,141 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2022-09-11 10:54:21,143 - kedro.pipeline.node - INFO - Running node: Add-indicator-fields: create_above_below_indicator_fields([combined_equity_data_standard_deviations,params:moving_average_settings]) -> [test_output_data]
+2022-09-11 10:54:21,146 - kedro.io.data_catalog - INFO - Saving data to 'test_output_data' (CSVDataSet)...
+2022-09-11 10:54:21,195 - kedro.runner.sequential_runner - INFO - Completed 3 out of 3 tasks
+2022-09-11 10:54:21,197 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully.
+2022-09-11 10:59:29,547 - kedro.framework.session.session - INFO - Kedro project stock-price-classification
+2022-09-11 10:59:29,925 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_VERSION = LooseVersion(pd.__version__)
+
+2022-09-11 10:59:29,927 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0210 = PANDAS_VERSION >= LooseVersion("0.21.0")
+
+2022-09-11 10:59:29,929 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0220 = PANDAS_VERSION >= LooseVersion("0.22.0")
+
+2022-09-11 10:59:29,930 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0230 = PANDAS_VERSION >= LooseVersion("0.23.0")
+
+2022-09-11 10:59:30,013 - kedro.io.data_catalog - INFO - Loading data from 'raw_combined_equity_data' (CSVDataSet)...
+2022-09-11 10:59:30,020 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2022-09-11 10:59:30,022 - kedro.pipeline.node - INFO - Running node: Add-moving-averages: calculate_rolling_means([raw_combined_equity_data,params:moving_average_settings]) -> [combined_equity_data_moving_averages]
+2022-09-11 10:59:30,036 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_moving_averages' (CSVDataSet)...
+2022-09-11 10:59:30,072 - kedro.runner.sequential_runner - INFO - Completed 1 out of 3 tasks
+2022-09-11 10:59:30,074 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_moving_averages' (CSVDataSet)...
+2022-09-11 10:59:30,082 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2022-09-11 10:59:30,083 - kedro.pipeline.node - INFO - Running node: Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_standard_deviations]
+2022-09-11 10:59:30,096 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_standard_deviations' (MemoryDataSet)...
+2022-09-11 10:59:30,098 - kedro.runner.sequential_runner - INFO - Completed 2 out of 3 tasks
+2022-09-11 10:59:30,099 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_standard_deviations' (MemoryDataSet)...
+2022-09-11 10:59:30,101 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2022-09-11 10:59:30,102 - kedro.pipeline.node - INFO - Running node: Add-indicator-fields: create_above_below_indicator_fields([combined_equity_data_standard_deviations,params:moving_average_settings]) -> [test_output_data]
+2022-09-11 10:59:30,106 - kedro.io.data_catalog - INFO - Saving data to 'test_output_data' (CSVDataSet)...
+2022-09-11 10:59:30,155 - kedro.runner.sequential_runner - INFO - Completed 3 out of 3 tasks
+2022-09-11 10:59:30,157 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully.

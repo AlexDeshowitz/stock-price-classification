@@ -41,7 +41,7 @@ def calculate_rolling_means(dataframe: pd.DataFrame, parameters: dict) -> pd.Dat
         
         else:
             for equity in dataframe[parameters['stock_field']].unique():
-                temp = dataframe[dataframe[parameters['stock_field']] == equity]
+                temp = dataframe[dataframe[parameters['stock_field']] == equity].reset_index(drop = True)
                 stock_moving_average = temp[parameters['calculation_field']].rolling(days).mean()
                 moving_averages.extend(stock_moving_average)
                 del temp
@@ -50,6 +50,35 @@ def calculate_rolling_means(dataframe: pd.DataFrame, parameters: dict) -> pd.Dat
     
     return dataframe
 
+
+def calculate_rolling_standard_deviations(dataframe: pd.DataFrame, parameters: dict) -> pd.DataFrame:
+
+    '''Function that calculates the standard deviations of the specified fields
+    
+    
+    Args:
+        Dataframe: pandas dataframe that contains a series of values over which the standard deviations are to be calculated
+    
+    Returns: Dataframe with standard deviation values added as columns in the dataset
+    '''
+
+    #TODO: come back and remove this nested for loop with more efficient process: pyspark likely a better option
+
+    for days in parameters['day_ranges']:
+
+        standard_deviations = []
+
+        for equity in dataframe[parameters['stock_field']].unique():
+
+            temp = dataframe[dataframe[parameters['stock_field']] == equity].reset_index(drop = True)
+            standard_deviations.extend(temp[parameters['calculation_field']].rolling(days).std())
+            print(len(standard_deviations))
+        
+        dataframe[str(days) +'_' + parameters['calculation_field'] + '_' + 'std'] = standard_deviations
+
+        del standard_deviations
+
+    return dataframe
 
 
 

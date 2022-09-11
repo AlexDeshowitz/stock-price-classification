@@ -34,3 +34,11 @@ Name: ticker, Length: 2772, dtype: object
 2770    AAPL
 2771    AAPL
 Name: ticker, Length: 2772, dtype: object
+2022-09-11 09:34:39,335 - kedro.pipeline.node - ERROR - Node 'Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_std_deviations]' failed with error: 
+'ticker'
+2022-09-11 09:35:52,432 - kedro.pipeline.node - ERROR - Node 'Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_std_deviations]' failed with error: 
+Length of values (7683984) does not match length of index (2772)
+2022-09-11 09:36:53,957 - kedro.pipeline.node - ERROR - Node 'Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_std_deviations]' failed with error: 
+Length of values (7683984) does not match length of index (2772)
+2022-09-11 09:37:15,897 - kedro.pipeline.node - ERROR - Node 'Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_std_deviations]' failed with error: 
+Length of values (8316) does not match length of index (2772)

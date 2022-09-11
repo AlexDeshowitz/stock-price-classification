@@ -52,3 +52,10 @@ combined_equity_data_moving_averages:
   filepath: data/02_intermediate/combined_equity_data_moving_averages.csv
 
 
+#### TEST - WILL NOT BE IN FINAL PIPELINE:
+
+test_output_data:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/test.csv
+
+

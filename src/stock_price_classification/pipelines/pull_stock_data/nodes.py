@@ -16,9 +16,25 @@ import os
 
 logger = logging.getLogger(__name__)
 
-
+# TODO: setup requirements.txt to include all packages with correct versions
 
 def pull_stock_data(data_pull_parameters: dict) -> pd.DataFrame:
+
+    ''' Pulls stock data down using the pdr from yfinance
+
+    Args:
+        equities: list of the equities the user wishes to pull
+        modeling_start: start period of the data date range to be pulled in format 'yyyy-mm-dd'
+        modeling_end: end period of the data date range to be pulled in format 'yyyy-mm-dd'
+        sleep_min: integer of the minimum number of seconds to pause between data pulls
+        sleep_max: integer of the maxmium number of seconed to pause between data pulls
+        expire_days: date set for the SQLlite environment expiration (default to 3)
+        single_dataframe: indicates whether a pull of multiple tickers should be stored in a single dataframe or one for each
+
+    Returns: Dataframe(s) saved to the catalogue to be used in later steps in the process
+    
+    
+    '''
     
     start = tm.time()
     

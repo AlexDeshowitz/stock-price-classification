@@ -19,7 +19,7 @@ moving_average_settings:
   exponential: False # whether to return exponential moving averages 
 
   # calculation outputs:
-  indicator_return_type: 'boolean' # takes boolean, percentage, boolean_and_percentage; input to the create_above_below_indicator_fields function
+  indicator_return_type: 'boolean_and_percentage' # takes boolean, percentage, boolean_and_percentage; input to the create_above_below_indicator_fields function
 
 
 

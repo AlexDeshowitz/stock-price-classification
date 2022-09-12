@@ -8,7 +8,6 @@ import numpy as np
 
 
 
-
 def calculate_rolling_means(dataframe: pd.DataFrame, parameters: dict) -> pd.DataFrame: 
 
     

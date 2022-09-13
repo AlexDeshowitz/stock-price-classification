@@ -21,5 +21,12 @@ moving_average_settings:
   # calculation outputs:
   indicator_return_type: 'boolean_and_percentage' # takes boolean, percentage, boolean_and_percentage; input to the create_above_below_indicator_fields function
 
-
+bollinger_band_settings:
+  moving_average_used : 21 # must be one of the day ranges set in the moving average settings
+  calculation_field : 'close' # need to reference the other dictionary in the definition statement
+  number_of_std : 2
+  use_sma: True
+  return_top_distance : True
+  return_bottom_distance : True
+  return_gap : True
 

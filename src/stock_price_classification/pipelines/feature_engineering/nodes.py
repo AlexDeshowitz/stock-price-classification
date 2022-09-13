@@ -118,6 +118,70 @@ def create_above_below_indicator_fields(dataframe: pd.DataFrame,
 
     return dataframe
 
+
+def create_bollinger_bands(dataframe: pd.DataFrame, global_parameters: dict, function_parameters: dict) -> pd.DataFrame:
+
+    #TODO: evolve model to include functionality to include multiple sets of bollinger bands
+
+    '''function that returns bollinger bands for each equity in the datasets sent to the model
+    
+    Args:
+        Dataframe: pandas dataframe containing the equities for which the bollinger bands are calculated
+        calculation_field: field used to calculate all features (set in the globals parameters)
+        moving_average_used: moving average field (calculated in prior step) to be used in the model
+        number_of_std: number of standard deviations from the mean to calculate the upper and lower bands
+        use_sma: Boolean to indicate whether to use the EMA or SMA in order to calculate the bollinger bands
+        return_top_distance: Boolean for whether to return field indicating distance to the upper band
+        return_bottom_distance: Boolean for whether to return field indicating distance to the bottom band
+        return_gap: Boolean for whether to return the distance between bands and the proportion relative to the price
+    '''
+
+    assert np.isin(str(function_parameters['moving_average_used']) +'_' + global_parameters['calculation_field'] + '_' + 'std', dataframe.columns), \
+    'please ensure the moving average number of days is in the days parameter'
+
+    if function_parameters['use_sma'] == True:
+        
+        assert np.isin(str(function_parameters['moving_average_used']) + '_' + global_parameters['calculation_field'] + '_' + 'sma', dataframe.columns), \
+            'Please ensure the moving average calculated is SMA'
+        
+
+        dataframe['upper_bollinger_band'] = dataframe[str(function_parameters['moving_average_used']) + '_' + global_parameters['calculation_field'] + '_' + 'sma'] + \
+                                            (function_parameters['number_of_std'] * dataframe[str(function_parameters['moving_average_used']) +'_' + global_parameters['calculation_field'] + '_' + 'std'])
+
+        dataframe['lower_bollinger_band'] = dataframe[str(function_parameters['moving_average_used']) + '_' + global_parameters['calculation_field'] + '_' + 'sma'] - \
+                                            (function_parameters['number_of_std'] * dataframe[str(function_parameters['moving_average_used']) +'_' + global_parameters['calculation_field'] + '_' + 'std'])
+
+        if function_parameters['return_top_distance'] == True:
+            dataframe['bol_pct_from_top'] = dataframe[global_parameters['calculation_field']] / dataframe['upper_bollinger_band'] -1
+
+        if function_parameters['return_bottom_distance'] == True:
+            dataframe['bol_pct_from_bottom'] = dataframe[global_parameters['calculation_field']] / dataframe['lower_bollinger_band'] -1
+
+        if function_parameters['return_gap'] == True:
+            dataframe['bol_range'] = dataframe['upper_bollinger_band'] - dataframe['lower_bollinger_band']
+            dataframe['bol_range_pct'] = (dataframe['upper_bollinger_band'] - dataframe['upper_bollinger_band']) / dataframe[global_parameters['calculation_field']]
+
+    elif function_parameters['use_sma'] == False:
+
+        assert np.isin(str(function_parameters['moving_average_used']) + '_' + global_parameters['calculation_field'] + '_' + 'ema', dataframe.columns), \
+            'Please ensure the moving average calculated is EMA'
+
+        dataframe['upper_bollinger_band'] = dataframe[str(function_parameters['moving_average_used']) + '_' + global_parameters['calculation_field'] + '_' + 'ema'] + \
+                                            (function_parameters['number_of_std'] * dataframe[str(function_parameters['moving_average_used']) +'_' + global_parameters['calculation_field'] + '_' + 'std'])
+
+        dataframe['lower_bollinger_band'] = dataframe[str(function_parameters['moving_average_used']) + '_' + global_parameters['calculation_field'] + '_' + 'ema'] - \
+                                            (function_parameters['number_of_std'] * dataframe[str(function_parameters['moving_average_used']) +'_' + global_parameters['calculation_field'] + '_' + 'std'])
+
+
+        if function_parameters['return_top_distance'] == True:
+            dataframe['bol_pct_from_top'] = dataframe[global_parameters['calculation_field']] / dataframe['upper_bollinger_band'] -1
+
+        if function_parameters['return_bottom_distance'] == True:
+            dataframe['bol_pct_from_bottom'] = dataframe[global_parameters['calculation_field']] / dataframe['lower_bollinger_band'] -1
+    
+
+    return dataframe
+
             
 
 

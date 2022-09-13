@@ -5,7 +5,8 @@ generated using Kedro 0.18.2
 
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import calculate_rolling_means, calculate_rolling_standard_deviations, create_above_below_indicator_fields
+from .nodes import calculate_rolling_means, calculate_rolling_standard_deviations, \
+                    create_above_below_indicator_fields, create_bollinger_bands
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -27,8 +28,17 @@ def create_pipeline(**kwargs) -> Pipeline:
              node(
                 func=create_above_below_indicator_fields,
                 inputs=["combined_equity_data_standard_deviations", "params:moving_average_settings"],
-                outputs="test_output_data",
+                outputs="combined_equity_data_above_below_indicators",
                 name="Add-indicator-fields",
+            ),
+
+            node(
+                func=create_bollinger_bands,
+                inputs=["combined_equity_data_above_below_indicators",
+                        "params:moving_average_settings",
+                        "params:bollinger_band_settings"],
+                outputs="test_output_data",
+                name="Add-bollinger-fields",
             ),
         ]
     )

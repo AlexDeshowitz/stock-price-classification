@@ -42,3 +42,15 @@ Length of values (7683984) does not match length of index (2772)
 Length of values (7683984) does not match length of index (2772)
 2022-09-11 09:37:15,897 - kedro.pipeline.node - ERROR - Node 'Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_std_deviations]' failed with error: 
 Length of values (8316) does not match length of index (2772)
+2022-09-13 17:19:13,342 - kedro.pipeline.node - ERROR - Node 'Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_indicators,params:stock_pull_settings,params:moving_average_settings]) -> [test_output_data]' failed with error: 
+'moving_average_used'
+2022-09-13 17:21:18,796 - kedro.pipeline.node - ERROR - Node 'Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_indicators,params:stock_pull_settings,params:moving_average_settings]) -> [test_output_data]' failed with error: 
+'moving_average_used'
+2022-09-13 17:22:09,168 - kedro.pipeline.node - ERROR - Node 'Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_indicators,params:stock_pull_settings,params:bollinger_band_settings]) -> [test_output_data]' failed with error: 
+'calculation_field'
+2022-09-13 17:22:34,614 - kedro.pipeline.node - ERROR - Node 'Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_indicators,params:moving_average_settings,params:bollinger_band_settings]) -> [test_output_data]' failed with error: 
+name 'df' is not defined
+2022-09-13 17:23:15,323 - kedro.pipeline.node - ERROR - Node 'Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_indicators,params:moving_average_settings,params:bollinger_band_settings]) -> [test_output_data]' failed with error: 
+name 'df' is not defined
+2022-09-13 17:23:49,679 - kedro.pipeline.node - ERROR - Node 'Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_indicators,params:moving_average_settings,params:bollinger_band_settings]) -> [test_output_data]' failed with error: 
+Please ensure the moving average calculated is EMA

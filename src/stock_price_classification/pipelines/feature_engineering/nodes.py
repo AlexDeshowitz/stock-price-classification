@@ -119,6 +119,39 @@ def create_above_below_indicator_fields(dataframe: pd.DataFrame,
     return dataframe
 
 
+def calculate_cumulative_days_above(dataframe: pd.DataFrame, parameters: dict) -> pd.DataFrame:
+
+    '''Calculates the cumulative days spent above a given moving average(s)
+    CAUTION: Must contain indicator field for each respective moving average -- requires running in the pipeline to remove from pipeline, recalculate features separately
+    
+    Args:
+        dataframe: dataframe containing a series of moving average fields across different equity tickers
+        mnoving averages
+
+    Returns: pandas dataframe containing the newly created cumulative features
+    '''
+
+    fields_to_calc = dataframe.columns[dataframe.columns.str.contains("|".join(['close_ema_ind', 'close_sma_ind']))]
+    # sort values to ensure consistency (in case something changes in the dataframe):
+    dataframe = dataframe.sort_values(by =[parameters['stock_field'], parameters['date_field'] ])
+
+    #TODO: Figure out a better way to ensure field + ticker consistency without nested for loop
+
+    for field in fields_to_calc: 
+        
+        #TODO: Figure out a better way to do this running total on a series
+        temp = dataframe[[parameters['stock_field'], parameters['date_field'], field]].reset_index(drop = True)
+        temp.fillna(0, inplace = True) # fill nulls for consistency
+
+        groups = ((temp[parameters['stock_field']]!=temp[parameters['stock_field']].shift()) | (temp[field]!=temp[field].shift())).cumsum()
+
+        dataframe['cum_days_above_' + field ] = temp.groupby(by = groups)[field].cumsum()
+
+        del temp, groups
+
+    return dataframe.reset_index(drop = True)
+
+
 def create_bollinger_bands(dataframe: pd.DataFrame, global_parameters: dict, function_parameters: dict) -> pd.DataFrame:
 
     #TODO: evolve model to include functionality to include multiple sets of bollinger bands

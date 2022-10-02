@@ -6,7 +6,8 @@ generated using Kedro 0.18.2
 from kedro.pipeline import Pipeline, node, pipeline
 
 from .nodes import calculate_rolling_means, calculate_rolling_standard_deviations, \
-                    create_above_below_indicator_fields, create_bollinger_bands
+                   create_above_below_indicator_fields, create_bollinger_bands, \
+                   calculate_cumulative_days_above
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -33,8 +34,15 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
 
             node(
+                func=calculate_cumulative_days_above,
+                inputs=["combined_equity_data_above_below_indicators", "params:moving_average_settings"],
+                outputs="combined_equity_data_above_below_ind_cum",
+                name="Add-cumulative-indicator-fields",
+            ),
+
+            node(
                 func=create_bollinger_bands,
-                inputs=["combined_equity_data_above_below_indicators",
+                inputs=["combined_equity_data_above_below_ind_cum",
                         "params:moving_average_settings",
                         "params:bollinger_band_settings"],
                 outputs="test_output_data",

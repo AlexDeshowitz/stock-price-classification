@@ -1,6 +1,7 @@
 
-# parameters for the modeling
+# parameters for modeling:
 
+# set the time period and the equity ticker symbols you wish to pull
 stock_pull_settings:
   equities: ['XLE', 'XLF', 'AAPL']
   modeling_start : '2019-01-01' # start date of the modeling period format: '2022-01-01'

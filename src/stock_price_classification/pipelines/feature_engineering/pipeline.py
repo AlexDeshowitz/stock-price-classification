@@ -7,7 +7,7 @@ from kedro.pipeline import Pipeline, node, pipeline
 
 from .nodes import calculate_rolling_means, calculate_rolling_standard_deviations, \
                    create_above_below_indicator_fields, create_bollinger_bands, \
-                   calculate_cumulative_days_above
+                   calculate_cumulative_days_above, create_classification_target_variable
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -45,8 +45,15 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["combined_equity_data_above_below_ind_cum",
                         "params:moving_average_settings",
                         "params:bollinger_band_settings"],
-                outputs="test_output_data",
+                outputs="combined_equity_data_w_bollinger_bands",
                 name="Add-bollinger-fields",
+            ),
+
+            node(
+                func=create_classification_target_variable,
+                inputs=["combined_equity_data_w_bollinger_bands", "params:moving_average_settings", "params:target_classifier_settings"],
+                outputs="modeling_input",
+                name="Add-classification-target",
             ),
         ]
     )

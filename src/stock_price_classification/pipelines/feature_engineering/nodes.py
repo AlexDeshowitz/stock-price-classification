@@ -167,6 +167,8 @@ def create_bollinger_bands(dataframe: pd.DataFrame, global_parameters: dict, fun
         return_top_distance: Boolean for whether to return field indicating distance to the upper band
         return_bottom_distance: Boolean for whether to return field indicating distance to the bottom band
         return_gap: Boolean for whether to return the distance between bands and the proportion relative to the price
+
+    Returns: dataframe with bollinger bands and moving trends added to the core dataset
     '''
 
     assert np.isin(str(function_parameters['moving_average_used']) +'_' + global_parameters['calculation_field'] + '_' + 'std', dataframe.columns), \
@@ -213,6 +215,32 @@ def create_bollinger_bands(dataframe: pd.DataFrame, global_parameters: dict, fun
             dataframe['bol_pct_from_bottom'] = dataframe[global_parameters['calculation_field']] / dataframe['lower_bollinger_band'] -1
     
 
+    return dataframe
+
+
+def create_classification_target_variable(dataframe: pd.DataFrame, global_parameters: dict, prediction_parameters: dict) -> pd.DataFrame:
+
+    '''Function that creates the target feature for the predictive model(s)
+    
+    Args:
+        dataframe: main dataset containing the outputs of the feature engineering pipeline
+        target_field: field from which the target feature is the be generated
+        stock_field: field containing the stock/ticker symbol(s)
+        prediction_horizon: timeframe from which to calculate the prediction (e.g., 20 days out)
+
+    Returns: Dataframe containing the predictive model target
+        
+    '''
+
+    # always start by sorting and resetting the index:
+    dataframe = dataframe.sort_values(by =[global_parameters['stock_field'], global_parameters['date_field'] ]).reset_index(drop = True)
+
+    dataframe['target_'+ str(prediction_parameters['prediction_horizon'])+"_days_ahead"] = dataframe.groupby(by = global_parameters['stock_field'])[global_parameters['calculation_field']].shift(-prediction_parameters['prediction_horizon'])
+
+    # create boolean for classification
+    dataframe['target_'+ str(prediction_parameters['prediction_horizon'])+"_days_ahead_ind"] = np.where(dataframe[global_parameters['calculation_field']] < dataframe['target_'+ str(prediction_parameters['prediction_horizon'])+"_days_ahead"],
+                                                                                    1 , 0 )
+  
     return dataframe
 
             

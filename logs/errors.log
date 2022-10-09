@@ -54,3 +54,5 @@ name 'df' is not defined
 name 'df' is not defined
 2022-09-13 17:23:49,679 - kedro.pipeline.node - ERROR - Node 'Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_indicators,params:moving_average_settings,params:bollinger_band_settings]) -> [test_output_data]' failed with error: 
 Please ensure the moving average calculated is EMA
+2022-10-09 09:38:23,874 - kedro.pipeline.node - ERROR - Node 'Add-classification-target: create_classification_target_variable([combined_equity_data_above_below_ind_cum,params:moving_average_settings]) -> [modeling_input]' failed with error: 
+'prediction_horizon'

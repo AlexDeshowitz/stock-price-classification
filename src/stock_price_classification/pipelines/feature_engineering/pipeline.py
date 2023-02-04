@@ -52,7 +52,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=create_classification_target_variable,
                 inputs=["combined_equity_data_w_bollinger_bands", "params:moving_average_settings", "params:target_classifier_settings"],
-                outputs="modeling_input",
+                outputs="combined_modeling_input",
                 name="Add-classification-target",
             ),
         ]

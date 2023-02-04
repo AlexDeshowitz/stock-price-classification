@@ -52,7 +52,7 @@ combined_equity_data_moving_averages:
   filepath: data/02_intermediate/combined_equity_data_moving_averages.csv
 
 
-modeling_input:
+combined_modeling_input:
   type: pandas.CSVDataSet
   filepath: data/03_primary/combined_modeling_input.csv
 

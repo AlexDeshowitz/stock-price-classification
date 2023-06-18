@@ -13,7 +13,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=pull_stock_data,
                 inputs=["params:stock_pull_settings"],
-                outputs="raw_combined_equity_data",
+                outputs="raw_combined_equity_data", # change this setting if using separate outputs for each equity
                 name="pull-in-stock-data",
             ),
         ]

@@ -3,6 +3,8 @@ This is a boilerplate pipeline 'feature_engineering'
 generated using Kedro 0.18.2
 """
 
+#TODO: add in target-date relative features in FE pipeline
+
 import pandas as pd
 import numpy as np
 

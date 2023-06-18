@@ -5,53 +5,51 @@
 #
 # We support interacting with a variety of data stores including local file systems, cloud, network and HDFS
 #
-# An example data set definition can look as follows:
-#
-#bikes:
-#  type: pandas.CSVDataSet
-#  filepath: "data/01_raw/bikes.csv"
-#
-#weather:
-#  type: spark.SparkDataSet
-#  filepath: s3a://your_bucket/data/01_raw/weather*
-#  file_format: csv
-#  credentials: dev_s3
-#  load_args:
-#    header: True
-#    inferSchema: True
-#  save_args:
-#    sep: '|'
-#    header: True
-#
-#scooters:
-#  type: pandas.SQLTableDataSet
-#  credentials: scooters_credentials
-#  table_name: scooters
-#  load_args:
-#    index_col: ['name']
-#    columns: ['name', 'gear']
-#  save_args:
-#    if_exists: 'replace'
-#    # if_exists: 'fail'
-#    # if_exists: 'append'
-#
-# The Data Catalog supports being able to reference the same file using two different DataSet implementations
-# (transcoding), templating and a way to reuse arguments that are frequently repeated. See more here:
-# https://kedro.readthedocs.io/en/stable/data/data_catalog.html
-#
-# This is a data set used by the "Hello World" example pipeline provided with the project
-# template. Please feel free to remove it once you remove the example pipeline.
 
 
+################################################################################
+# TYPES
+################################################################################
+
+_csv: &csv
+    type: pandas.CSVDataSet
+    load_args:
+        sep: ","
+    fs_args:
+        open_args_load:
+            mode: "rb"
+            encoding: "utf-8"
+        open_args_save:
+            mode: "w"
+            encoding: "utf-8-sig"
+    save_args:
+        line_terminator: "\n"
+
+_matplotlib_fig: &matplotlib_fig
+    type: matplotlib.MatplotlibWriter
+    save_args:
+        transparent: False
+
+
+################################################################################
+# 01 RAW
+################################################################################
 raw_combined_equity_data: # raw dataset of the combined datasets in the model
   type: pandas.CSVDataSet
   filepath: data/01_raw/combined_stock_pulls/combined_raw_stock_data.csv
 
+
+################################################################################
+# 02 INTERMEDIATE
+################################################################################
 combined_equity_data_moving_averages:
   type: pandas.CSVDataSet
   filepath: data/02_intermediate/combined_equity_data_moving_averages.csv
 
 
+################################################################################
+# 03 PRIMARY
+################################################################################
 combined_modeling_input:
   type: pandas.CSVDataSet
   filepath: data/03_primary/combined_modeling_input.csv

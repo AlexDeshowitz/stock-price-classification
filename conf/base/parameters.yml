@@ -36,9 +36,7 @@ target_classifier_settings:
 
 modeling_settings:
   continuous_feature_cutoff : 0.6 
-  stock_field : 'ticker'
-  calculation_field : 'close'
   drop_original_fields : True
   drop_stock_field: True # keep this fixed 
-  train_size : 0.20
+  test_size : 0.20
   seed : 1187

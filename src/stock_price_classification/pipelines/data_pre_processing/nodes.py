@@ -115,5 +115,45 @@ def standardize_continuous_features(dataframe: pd.DataFrame, global_parameters: 
     return z_scores
 
 
+def one_hot_encode_tickers(dataframe: pd.DataFrame, parameters: Dict) -> pd.DataFrame:
+
+    '''Returns one-hot encoded features to the predictive dataset NOTE: May not work, but this retains some of the information in the original dataframe while also potentially giving the global model a nudge
+       Note: we choose not to drop first for now, even though it's a trap; Can be used post processing or as model features
+    Args:
+        dataframe: core dataset that has been augmented with additional features
+        parameters:
+            stock_field: text field containing the 
+    Returns:   
+        dataframe with augmented columns
+    
+    '''
+
+    dataframe = pd.get_dummies(data = dataframe, prefix = "ind", columns = [parameters['stock_field']], drop_first = False)
+
+    return dataframe
+
+
+def create_training_test_splits(dataframe: pd.DataFrame, parameters: Dict) -> Tuple:
+
+    '''Function that splits out training and test sets for machine learning; for the purposes of this model the way we piose the problem allows for random train test split
+    Args:
+        dataframe: pandas dataframe containing only the target field and the features to be used by the classifier
+        parameters:
+            test_ratio: proportion of samples in the dataframe to be used as a test set once the models are tuned and evaluated
+
+    '''
+
+    # define Y and x:
+    target_feature = list(dataframe.columns[dataframe.columns.str.contains('target')])
+
+    y = dataframe[target_feature]
+    X = dataframe.drop(columns = target_feature)
+
+    # create the training and test splits:
+    X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=parameters['test_size'], random_state=parameters['seed'])
+
+    return X_train, X_test, y_train, y_test
+
+
 
 

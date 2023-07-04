@@ -40,3 +40,12 @@ modeling_settings:
   drop_stock_field: True # keep this fixed 
   test_size : 0.20
   seed : 1187
+
+  # classifier settings: (only allowing selected itemsto be specified for V0)
+  support_vector_classifier:
+    c: 1.0
+    kernel: 'rbf'
+    gamma: 'scale'
+    
+
+

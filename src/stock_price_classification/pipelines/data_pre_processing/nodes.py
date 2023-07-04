@@ -150,7 +150,7 @@ def create_training_test_splits(dataframe: pd.DataFrame, parameters: Dict) -> Tu
     X = dataframe.drop(columns = target_feature)
 
     # create the training and test splits:
-    X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=parameters['test_size'], random_state=parameters['seed'])
+    X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=parameters['test_size'], random_state=parameters['seed'], stratify = y)
 
     return X_train, X_test, y_train, y_test
 

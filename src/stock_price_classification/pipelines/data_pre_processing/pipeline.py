@@ -27,13 +27,13 @@ def create_pipeline(**kwargs) -> Pipeline:
              node(
                     func=one_hot_encode_tickers,
                     inputs=["standardized_modeling_data", "params:moving_average_settings"],
-                    outputs="one-hot-encoded-tickers",
+                    outputs="one_hot_encoded_tickers",
                     name="one-hot-encoding",
                 ),
 
              node(
                     func=create_training_test_splits,
-                    inputs=["standardized_modeling_data", "params:modeling_settings"],
+                    inputs=["one_hot_encoded_tickers", "params:modeling_settings"],
                     outputs=["X_train", "X_test", "y_train", "y_test"],
                     name="train-test-split",
                 ),

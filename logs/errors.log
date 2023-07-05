@@ -56,3 +56,9 @@ name 'df' is not defined
 Please ensure the moving average calculated is EMA
 2022-10-09 09:38:23,874 - kedro.pipeline.node - ERROR - Node 'Add-classification-target: create_classification_target_variable([combined_equity_data_above_below_ind_cum,params:moving_average_settings]) -> [modeling_input]' failed with error: 
 'prediction_horizon'
+2023-07-05 10:46:44,674 - kedro.pipeline.node - ERROR - Node 'train-classifiers: train_models([X_train,y_train,params:modeling_settings]) -> [results_df,aggregated_results_df]' failed with error: 
+'dict' object has no attribute 'support_vector_classifier'
+2023-07-05 10:53:12,809 - kedro.pipeline.node - ERROR - Node 'train-classifiers: train_models([X_train,y_train,params:modeling_settings]) -> [results_df,aggregated_results_df]' failed with error: 
+'cross_val_splits'
+2023-07-05 10:58:09,644 - kedro.pipeline.node - ERROR - Node 'train-classifiers: train_models([X_train,y_train,params:modeling_settings]) -> [results_df,aggregated_results_df]' failed with error: 
+could not convert string to float: 'XLE'

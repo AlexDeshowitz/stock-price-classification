@@ -63,7 +63,13 @@ combined_modeling_input:
 ################################################################################
 # 05 MODEL INPUT
 ################################################################################
+X_train:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/X_train.csv
 
+y_train:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/y_train.csv
 
 
 

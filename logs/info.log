@@ -3464,3 +3464,160 @@ You can resume the pipeline run by adding the following argument to your previou
 2023-07-05 11:08:52,690 - kedro.io.data_catalog - INFO - Loading data from 'X_test' (MemoryDataSet)...
 2023-07-05 11:08:52,691 - kedro.io.data_catalog - INFO - Loading data from 'y_test' (MemoryDataSet)...
 2023-07-05 11:08:52,693 - kedro.io.data_catalog - INFO - Loading data from 'aggregated_results_df' (MemoryDataSet)...
+2023-11-23 10:25:20,878 - kedro.extras.extensions.ipython - INFO - Kedro project stock price classification
+2023-11-23 10:25:20,881 - kedro.extras.extensions.ipython - INFO - Defined global variable 'context', 'session', 'catalog' and 'pipelines'
+2023-11-23 10:32:45,774 - kedro.framework.session.session - INFO - Kedro project stock-price-classification
+2023-11-23 10:32:46,235 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_VERSION = LooseVersion(pd.__version__)
+
+2023-11-23 10:32:46,237 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0210 = PANDAS_VERSION >= LooseVersion("0.21.0")
+
+2023-11-23 10:32:46,239 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0220 = PANDAS_VERSION >= LooseVersion("0.22.0")
+
+2023-11-23 10:32:46,241 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0230 = PANDAS_VERSION >= LooseVersion("0.23.0")
+
+2023-11-23 10:32:58,303 - kedro.io.data_catalog - INFO - Loading data from 'raw_combined_equity_data' (CSVDataSet)...
+2023-11-23 10:32:58,312 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,314 - kedro.pipeline.node - INFO - Running node: Add-moving-averages: calculate_rolling_means([raw_combined_equity_data,params:moving_average_settings]) -> [combined_equity_data_moving_averages]
+2023-11-23 10:32:58,330 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_moving_averages' (CSVDataSet)...
+2023-11-23 10:32:58,370 - kedro.runner.sequential_runner - INFO - Completed 1 out of 6 tasks
+2023-11-23 10:32:58,371 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_moving_averages' (CSVDataSet)...
+2023-11-23 10:32:58,379 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,381 - kedro.pipeline.node - INFO - Running node: Add-standard-deviations: calculate_rolling_standard_deviations([combined_equity_data_moving_averages,params:moving_average_settings]) -> [combined_equity_data_standard_deviations]
+2023-11-23 10:32:58,395 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_standard_deviations' (MemoryDataSet)...
+2023-11-23 10:32:58,397 - kedro.runner.sequential_runner - INFO - Completed 2 out of 6 tasks
+2023-11-23 10:32:58,398 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_standard_deviations' (MemoryDataSet)...
+2023-11-23 10:32:58,399 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,401 - kedro.pipeline.node - INFO - Running node: Add-indicator-fields: create_above_below_indicator_fields([combined_equity_data_standard_deviations,params:moving_average_settings]) -> [combined_equity_data_above_below_indicators]
+2023-11-23 10:32:58,406 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_above_below_indicators' (MemoryDataSet)...
+2023-11-23 10:32:58,409 - kedro.runner.sequential_runner - INFO - Completed 3 out of 6 tasks
+2023-11-23 10:32:58,410 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_above_below_indicators' (MemoryDataSet)...
+2023-11-23 10:32:58,412 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,413 - kedro.pipeline.node - INFO - Running node: Add-cumulative-indicator-fields: calculate_cumulative_days_above([combined_equity_data_above_below_indicators,params:moving_average_settings]) -> [combined_equity_data_above_below_ind_cum]
+2023-11-23 10:32:58,429 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_above_below_ind_cum' (MemoryDataSet)...
+2023-11-23 10:32:58,432 - kedro.runner.sequential_runner - INFO - Completed 4 out of 6 tasks
+2023-11-23 10:32:58,433 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_above_below_ind_cum' (MemoryDataSet)...
+2023-11-23 10:32:58,435 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,436 - kedro.io.data_catalog - INFO - Loading data from 'params:bollinger_band_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,438 - kedro.pipeline.node - INFO - Running node: Add-bollinger-fields: create_bollinger_bands([combined_equity_data_above_below_ind_cum,params:moving_average_settings,params:bollinger_band_settings]) -> [combined_equity_data_w_bollinger_bands]
+2023-11-23 10:32:58,443 - kedro.io.data_catalog - INFO - Saving data to 'combined_equity_data_w_bollinger_bands' (MemoryDataSet)...
+2023-11-23 10:32:58,446 - kedro.runner.sequential_runner - INFO - Completed 5 out of 6 tasks
+2023-11-23 10:32:58,447 - kedro.io.data_catalog - INFO - Loading data from 'combined_equity_data_w_bollinger_bands' (MemoryDataSet)...
+2023-11-23 10:32:58,449 - kedro.io.data_catalog - INFO - Loading data from 'params:moving_average_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,450 - kedro.io.data_catalog - INFO - Loading data from 'params:target_classifier_settings' (MemoryDataSet)...
+2023-11-23 10:32:58,452 - kedro.pipeline.node - INFO - Running node: Add-classification-target: create_classification_target_variable([combined_equity_data_w_bollinger_bands,params:moving_average_settings,params:target_classifier_settings]) -> [combined_modeling_input]
+2023-11-23 10:32:58,458 - kedro.io.data_catalog - INFO - Saving data to 'combined_modeling_input' (CSVDataSet)...
+2023-11-23 10:32:58,542 - kedro.runner.sequential_runner - INFO - Completed 6 out of 6 tasks
+2023-11-23 10:32:58,544 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully.
+2023-12-24 14:44:37,200 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-24 14:44:59,323 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_VERSION = LooseVersion(pd.__version__)
+
+2023-12-24 14:44:59,326 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0210 = PANDAS_VERSION >= LooseVersion("0.21.0")
+
+2023-12-24 14:44:59,329 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0220 = PANDAS_VERSION >= LooseVersion("0.22.0")
+
+2023-12-24 14:44:59,332 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0230 = PANDAS_VERSION >= LooseVersion("0.23.0")
+
+2023-12-25 08:23:31,310 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-25 08:32:09,448 - kedro.extras.extensions.ipython - INFO - Kedro project stock price classification
+2023-12-25 08:32:09,451 - kedro.extras.extensions.ipython - INFO - Defined global variable 'context', 'session', 'catalog' and 'pipelines'
+2023-12-25 08:32:22,976 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-25 08:35:03,817 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_VERSION = LooseVersion(pd.__version__)
+
+2023-12-25 08:35:03,820 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0210 = PANDAS_VERSION >= LooseVersion("0.21.0")
+
+2023-12-25 08:35:03,825 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0220 = PANDAS_VERSION >= LooseVersion("0.22.0")
+
+2023-12-25 08:35:03,829 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0230 = PANDAS_VERSION >= LooseVersion("0.23.0")
+
+2023-12-25 08:39:04,140 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-25 08:39:51,825 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-30 15:23:45,300 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-30 15:25:40,937 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-30 16:06:13,490 - kedro.extras.extensions.ipython - INFO - Kedro project stock price classification
+2023-12-30 16:06:13,495 - kedro.extras.extensions.ipython - INFO - Defined global variable 'context', 'session', 'catalog' and 'pipelines'
+2023-12-30 16:09:42,925 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-30 16:14:07,290 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-30 16:36:47,539 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_VERSION = LooseVersion(pd.__version__)
+
+2023-12-30 16:36:47,542 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0210 = PANDAS_VERSION >= LooseVersion("0.21.0")
+
+2023-12-30 16:36:47,545 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0220 = PANDAS_VERSION >= LooseVersion("0.22.0")
+
+2023-12-30 16:36:47,548 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/pandas_datareader/compat/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  PANDAS_0230 = PANDAS_VERSION >= LooseVersion("0.23.0")
+
+2023-12-30 16:37:01,703 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-30 16:42:44,697 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-30 16:43:50,882 - kedro.io.data_catalog - INFO - Loading data from 'combined_modeling_input' (CSVDataSet)...
+2023-12-31 10:46:43,046 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:2: FutureWarning: The default value of regex will change from True to False in a future version.
+  
+
+2023-12-31 10:47:25,411 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:2: FutureWarning: The default value of regex will change from True to False in a future version.
+  
+
+2023-12-31 10:47:53,457 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:3: FutureWarning: The default value of regex will change from True to False in a future version.
+  This is separate from the ipykernel package so we can avoid doing imports until
+
+2023-12-31 10:48:29,687 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-06 15:31:53,567 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-06 15:33:31,982 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-06 15:34:49,293 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-06 15:36:14,938 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-06 15:36:48,638 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:21:56,885 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:22:42,351 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:23:27,415 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:24:22,321 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:27:11,706 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:27:11,715 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:26: FutureWarning: The default value of regex will change from True to False in a future version.
+
+2024-01-07 10:27:53,542 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:27:53,546 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:15: FutureWarning: The default value of regex will change from True to False in a future version.
+  from ipykernel import kernelapp as app
+
+2024-01-07 10:28:41,821 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: The default value of regex will change from True to False in a future version.
+  """Entry point for launching an IPython kernel.
+
+2024-01-07 10:28:41,830 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:26: FutureWarning: The default value of regex will change from True to False in a future version.
+
+2024-01-07 10:29:06,687 - py.warnings - WARNING - /opt/anaconda3/envs/stock-classification/lib/python3.7/site-packages/ipykernel_launcher.py:26: FutureWarning: The default value of regex will change from True to False in a future version.
+
